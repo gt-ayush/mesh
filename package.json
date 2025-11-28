@@ -1,0 +1,14 @@
+{
+  "name": "mesh-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Mesh Network App",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "author": "Ayush",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
