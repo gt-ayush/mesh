@@ -66,3 +66,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
     }
 }
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "../frontend/static"),
+]
+
