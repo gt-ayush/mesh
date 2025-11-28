@@ -14,6 +14,7 @@ Each node can send and receive messages through REST API endpoints.
 ---
 
 ## Project Structure
+```
 backend/
 │── manage.py
 │── mesh_project/
@@ -27,7 +28,7 @@ backend/
     ├── urls.py
     ├── routing.py
     └── comm.py
-
+```
 ---
 
 ## Setup & Run
