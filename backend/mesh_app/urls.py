@@ -5,4 +5,5 @@ from .views import send_message, receive_messages
 urlpatterns = [
     path('send/', send_message, name='send'),
     path('receive/', receive_messages, name='receive'),
+    path('', home, name='home'),
 ]

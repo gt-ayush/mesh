@@ -1,6 +1,7 @@
 # mesh_app/views.py
 from django.http import JsonResponse
 from .store import messages_store  # import from store instead
+from django.shortcuts import render
 
 def send_message(request):
     msg = request.GET.get('msg', '')
@@ -11,3 +12,5 @@ def send_message(request):
 
 def receive_messages(request):
     return JsonResponse({"messages": messages_store})
+def home(request):
+    return render(request, 'index.html')

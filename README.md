@@ -57,7 +57,7 @@ ayush@ayush-83eq:~/Desktop/mesh$ tree
 ## Setup & Run
 
 
-# ✅ **1 — Go to Backend Folder**
+# **1 — Go to Backend Folder**
 
 ```bash
 cd ~/Desktop/mesh/backend
@@ -65,7 +65,7 @@ cd ~/Desktop/mesh/backend
 
 ---
 
-# ✅ **2 — Create & Activate Virtual Environment**
+#  **2 — Create & Activate Virtual Environment**
 
 ```bash
 python3 -m venv venv
@@ -80,7 +80,7 @@ You should now see:
 
 ---
 
-# ✅ **3 — Install Requirements**
+#  **3 — Install Requirements**
 
 Your root folder already contains `requirements.txt`.
 
@@ -99,7 +99,7 @@ This installs:
 
 ---
 
-# ✅ **4 — Apply Migrations**
+# **4 — Apply Migrations**
 
 ```bash
 python3 manage.py migrate
@@ -109,7 +109,7 @@ python3 manage.py migrate
 
 ---
 
-# ✅ **5 — Run Server**
+#  **5 — Run Server**
 
 ```bash
 python3 manage.py runserver
@@ -167,7 +167,7 @@ Expected output:
 
 One of these is wrong:
 
-### 1️⃣ The server is *not running*
+### 1 The server is *not running*
 
 Make sure the FIRST terminal still shows:
 
@@ -175,7 +175,7 @@ Make sure the FIRST terminal still shows:
 Starting development server at http://127.0.0.1:8000/
 ```
 
-### 2️⃣ Your URL routes are incorrect
+### 2 Your URL routes are incorrect
 
 Open:
 `backend/mesh_project/urls.py`
@@ -205,7 +205,7 @@ urlpatterns = [
 ]
 ```
 
-### 3️⃣ Another app is using port 8000
+### 3 Another app is using port 8000
 
 Try:
 
