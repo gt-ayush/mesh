@@ -43,3 +43,8 @@ def receive_messages():
 
     # Avoid duplicates in returned list: return full_plain (demo-friendly)
     return full_plain
+
+
+websocket_urlpatterns = [
+    re_path(r'ws/chat/', ChatConsumer.as_asgi()),
+]

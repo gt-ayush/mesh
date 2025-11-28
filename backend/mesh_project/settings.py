@@ -63,8 +63,11 @@ STATICFILES_DIRS = [BASE_DIR / '../frontend/static']
 ASGI_APPLICATION = "mesh_project.asgi.application"
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
 }
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "../frontend/static"),
