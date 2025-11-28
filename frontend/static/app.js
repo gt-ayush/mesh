@@ -1,42 +1,31 @@
-// Connect to WebSocket server
 let socket = new WebSocket("ws://127.0.0.1:8000/ws/chat/");
 
-socket.onopen = () => {
-    console.log("Connected to WebSocket!");
-};
+socket.onopen = () => console.log("WebSocket connected!");
+socket.onclose = () => console.log("WebSocket disconnected.");
 
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    displayMessage(data.message, false);
+    addMessage(data.message, false);
 };
 
-socket.onclose = () => {
-    console.log("Disconnected from WebSocket.");
-};
-
-// Send message
 function sendMessage() {
     const input = document.getElementById("messageInput");
     const msg = input.value.trim();
-
-    if (msg === "") return;
+    if (!msg) return;
 
     socket.send(JSON.stringify({ message: msg }));
-    displayMessage(msg, true);
+    addMessage(msg, true);
 
     input.value = "";
 }
 
-// Show message in chat window
-function displayMessage(msg, isSelf) {
+function addMessage(text, self) {
     const box = document.getElementById("chat-box");
 
     const div = document.createElement("div");
-    div.classList.add("message");
-    if (isSelf) div.classList.add("self");
+    div.className = "msg " + (self ? "self" : "other");
+    div.textContent = text;
 
-    div.textContent = msg;
     box.appendChild(div);
-
-    box.scrollTop = box.scrollHeight; // Auto-scroll
+    box.scrollTop = box.scrollHeight;
 }
