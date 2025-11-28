@@ -15,19 +15,42 @@ Each node can send and receive messages through REST API endpoints.
 
 ## Project Structure
 ```
-backend/
-│── manage.py
-│── mesh_project/
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-│
-└── mesh_app/
-    ├── models.py
-    ├── views.py
-    ├── urls.py
-    ├── routing.py
-    └── comm.py
+ayush@ayush-83eq:~/Desktop/mesh$ tree
+.
+├── backend
+│   ├── manage.py
+│   ├── mesh_app
+│   │   ├── comm.py
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── routing.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   └── mesh_project
+│       ├── __init__.py
+│       ├── settings.py
+│       ├── urls.py
+│       └── wsgi.py
+├── docs
+│   ├── architecture.md
+│   ├── demo-plan.md
+│   └── overview.md
+├── frontend
+│   ├── static
+│   │   ├── app.js
+│   │   └── styles.css
+│   └── templates
+│       └── index.html
+├── LICENSE
+├── package.json
+├── README.md
+├── requirements.txt
+└── tests
+    ├── test_comm.py
+    └── test_node.py
+
+9 directories, 23 files
+
 ```
 ---
 
