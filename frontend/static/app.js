@@ -1,4 +1,4 @@
-let socket = new WebSocket("ws://127.0.0.1:8000/ws/chat/");
+const socket = new WebSocket("ws://127.0.0.1:8000/ws/chat/");
 
 socket.onopen = () => console.log("WebSocket connected!");
 socket.onclose = () => console.log("WebSocket disconnected.");
