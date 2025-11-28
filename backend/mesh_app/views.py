@@ -1,17 +1,13 @@
-
+# mesh_app/views.py
 from django.http import JsonResponse
-from .routing import send_message, receive_messages
-from django.shortcuts import render
-def send_view(request):
+from .store import messages_store  # import from store instead
+
+def send_message(request):
     msg = request.GET.get('msg', '')
     if msg:
-        send_message(msg)
-        return JsonResponse({'status': 'success', 'message': msg})
-    return JsonResponse({'status': 'error', 'message': 'No message provided'})
+        messages_store.append(msg)
+        return JsonResponse({"status": "success", "message": msg})
+    return JsonResponse({"status": "fail", "message": "No message provided"})
 
-def receive_view(request):
-    messages = receive_messages()
-    return JsonResponse({'messages': messages})
-
-def home(request):
-    return render(request, "index.html")
+def receive_messages(request):
+    return JsonResponse({"messages": messages_store})
