@@ -1,7 +1,7 @@
 
 from django.http import JsonResponse
 from .routing import send_message, receive_messages
-
+from django.shortcuts import render
 def send_view(request):
     msg = request.GET.get('msg', '')
     if msg:
@@ -12,3 +12,6 @@ def send_view(request):
 def receive_view(request):
     messages = receive_messages()
     return JsonResponse({'messages': messages})
+
+def home(request):
+    return render(request, "index.html")
