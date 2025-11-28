@@ -1,7 +1,8 @@
 from django.urls import path
-from . import views
+from .views import home, send_message, receive_messages
 
 urlpatterns = [
-    path('send/', views.send_view, name='send'),
-    path('receive/', views.receive_view, name='receive'),
+    path("", home, name="home"),
+    path("send/", send_message, name="send"),
+    path("receive/", receive_messages, name="receive"),
 ]
