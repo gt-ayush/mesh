@@ -1,64 +1,42 @@
-// frontend/static/app.js
+// Connect to WebSocket server
+let socket = new WebSocket("ws://127.0.0.1:8000/ws/chat/");
 
-let socket = null;
-const ws_url = (location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + "/ws/chat/";
+socket.onopen = () => {
+    console.log("Connected to WebSocket!");
+};
 
-function appendMessage(text) {
-    const chatBox = document.getElementById("chat-box");
-    const p = document.createElement("p");
-    p.textContent = "🟦 " + text;
-    chatBox.appendChild(p);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    displayMessage(data.message, false);
+};
 
-function setupWebSocket() {
-    socket = new WebSocket(ws_url);
+socket.onclose = () => {
+    console.log("Disconnected from WebSocket.");
+};
 
-    socket.onopen = function() {
-        console.log("WebSocket connected");
-    };
-
-    socket.onmessage = function(event) {
-        try {
-            const data = JSON.parse(event.data);
-            if (data.type === "chat") {
-                appendMessage(data.message);
-            } else if (data.type === "history") {
-                // history.messages is an array
-                const hist = data.messages || [];
-                document.getElementById("chat-box").innerHTML = "";
-                hist.forEach(m => appendMessage(m));
-            }
-        } catch (e) {
-            console.error("Invalid message", e);
-        }
-    };
-
-    socket.onclose = function() {
-        console.log("WebSocket closed, retrying in 2s...");
-        setTimeout(setupWebSocket, 2000);
-    };
-
-    socket.onerror = function(err) {
-        console.error("WebSocket error", err);
-        socket.close();
-    };
-}
-
-// Call this on page load
-setupWebSocket();
-
-async function sendMessage() {
-    const input = document.getElementById("msgInput");
+// Send message
+function sendMessage() {
+    const input = document.getElementById("messageInput");
     const msg = input.value.trim();
-    if (!msg) return;
 
-    // Use websocket if connected
-    if (socket && socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify({type: "chat", message: msg}));
-    } else {
-        // Fallback to HTTP endpoint
-        await fetch(`/send/?msg=${encodeURIComponent(msg)}`);
-    }
+    if (msg === "") return;
+
+    socket.send(JSON.stringify({ message: msg }));
+    displayMessage(msg, true);
+
     input.value = "";
+}
+
+// Show message in chat window
+function displayMessage(msg, isSelf) {
+    const box = document.getElementById("chat-box");
+
+    const div = document.createElement("div");
+    div.classList.add("message");
+    if (isSelf) div.classList.add("self");
+
+    div.textContent = msg;
+    box.appendChild(div);
+
+    box.scrollTop = box.scrollHeight; // Auto-scroll
 }
